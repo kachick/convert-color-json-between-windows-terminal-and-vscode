@@ -24,15 +24,13 @@ const vSCodeColorSchemaByWindowsTerminalColorSchema = {
   yellow: 'terminal.ansiYellow',
 } as const;
 
-type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
-
-const isWindowsTerminalColorSchemaKey = (key: string): key is WindowsTerminalColorSchemaKeys => {
-  return key in vSCodeColorSchemaByWindowsTerminalColorSchema;
-};
-
 type WindowsTerminalColorSchema = {
   [K in keyof typeof vSCodeColorSchemaByWindowsTerminalColorSchema]: string;
 };
+type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
+const isWindowsTerminalColorSchemaKey = (key: string): key is WindowsTerminalColorSchemaKeys =>
+  key in vSCodeColorSchemaByWindowsTerminalColorSchema;
+
 type VSCodeColorSchema = {
   [K in ValueOf<typeof vSCodeColorSchemaByWindowsTerminalColorSchema>]: string;
 };
@@ -41,11 +39,11 @@ const convertWindowsTerminalSchemaToVSCodeSchema = (
   windowsTerminalSchema: Partial<WindowsTerminalColorSchema>
 ) => {
   const vscodeSchema: Partial<VSCodeColorSchema> = {};
-  for (const [key, value] of Object.entries(windowsTerminalSchema)) {
+  Object.entries(windowsTerminalSchema).forEach(([key, value]) => {
     if (isWindowsTerminalColorSchemaKey(key)) {
       vscodeSchema[vSCodeColorSchemaByWindowsTerminalColorSchema[key]] = value;
     }
-  }
+  });
   return vscodeSchema;
 };
 
@@ -68,7 +66,7 @@ function App() {
     if (inputtedJSON) {
       let want;
       if ('schemes' in inputtedJSON) {
-        const schemes: WindowsTerminalColorSchema[] = inputtedJSON['schemes'];
+        const { schemes }: { schemes: WindowsTerminalColorSchema[] } = inputtedJSON;
         want = schemes.map((scheme) => ({
           'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(scheme),
         }));
@@ -126,7 +124,7 @@ function App() {
               Convert!
             </button>
           </form>
-          <p className="convert-errors" hidden={errors.length == 0}>
+          <p className="convert-errors" hidden={errors.length === 0}>
             You are converting invalid JSON
             {errors.map((e, idx) => (
               <li key={idx}>{e.message}</li>
@@ -137,7 +135,7 @@ function App() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                navigator.clipboard.writeText(outputText).then((_) => setIsVisibleCopied(true));
+                navigator.clipboard.writeText(outputText).then(() => setIsVisibleCopied(true));
               }}
               className="pure-u-1-3 pure-button pure-button-primary button-next"
             >
