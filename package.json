@@ -1,11 +1,17 @@
 {
   "name": "convert_theme_json_between_windows_terminal_and_vscode",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Kenichi Kamiya <kachick1@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier-check": "prettier --list-different \"src/**/*.{js,ts,tsx,css,scss,html}\" \"./*.html\"",
+    "prettier:fix": "prettier --write \"src/**/*.{js,ts,tsx,css,scss,html}\" \"./*.html\"",
+    "eslint": "eslint --ignore-pattern \"src/**/*d.ts\" \"src/**/*.{js,ts,tsx}\"",
+    "eslint:fix": "eslint --ignore-pattern \"src/**/*d.ts\" --fix \"src/**/*.{js,ts,tsx}\""
   },
   "dependencies": {
     "react": "^18.0.0",
