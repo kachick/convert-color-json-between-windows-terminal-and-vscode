@@ -8,12 +8,11 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: 'y'
+      - uses: actions/checkout@v3
+      - run: 'ynpm ci && npm run build'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: >-
-            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLOR_JSON_TERMINAL_AND_VSCODE
-            }}
+            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLOR_JSON_TERMINAL_AND_VSCODE }}
           projectId: color-json-terminal-and-vscode
