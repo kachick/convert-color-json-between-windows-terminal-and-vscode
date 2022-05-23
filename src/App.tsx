@@ -152,7 +152,7 @@ function App() {
           <p>
             <a
               className="pure-menu-heading pure-menu-link App-link"
-              href="https://github.com/kachick/convert_theme_json_between_windows_terminal_and_vscode"
+              href="https://github.com/kachick/convert-color-json-between-windows-terminal-and-vscode"
               target="_blank"
               rel="noopener noreferrer"
             >
