@@ -1,5 +1,5 @@
 {
-  "name": "convert_theme_json_between_windows_terminal_and_vscode",
+  "name": "convert-color-json-between-windows-terminal-and-vscode",
   "private": true,
   "version": "0.0.1",
   "author": "Kenichi Kamiya <kachick1@gmail.com>",

@@ -3,7 +3,7 @@ import './App.css';
 
 type ValueOf<T> = T[keyof T];
 
-const vSCodeColorSchemaByWindowsTerminalColorSchema = {
+const VSCodeColorSchemaByWindowsTerminalColorSchema = {
   background: 'terminal.background',
   foreground: 'terminal.foreground',
   black: 'terminal.ansiBlack',
@@ -25,14 +25,14 @@ const vSCodeColorSchemaByWindowsTerminalColorSchema = {
 } as const;
 
 type WindowsTerminalColorSchema = {
-  [K in keyof typeof vSCodeColorSchemaByWindowsTerminalColorSchema]: string;
+  [K in keyof typeof VSCodeColorSchemaByWindowsTerminalColorSchema]: string;
 };
 type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
 const isWindowsTerminalColorSchemaKey = (key: string): key is WindowsTerminalColorSchemaKeys =>
-  key in vSCodeColorSchemaByWindowsTerminalColorSchema;
+  key in VSCodeColorSchemaByWindowsTerminalColorSchema;
 
 type VSCodeColorSchema = {
-  [K in ValueOf<typeof vSCodeColorSchemaByWindowsTerminalColorSchema>]: string;
+  [K in ValueOf<typeof VSCodeColorSchemaByWindowsTerminalColorSchema>]: string;
 };
 
 const convertWindowsTerminalSchemaToVSCodeSchema = (
@@ -41,11 +41,13 @@ const convertWindowsTerminalSchemaToVSCodeSchema = (
   const vscodeSchema: Partial<VSCodeColorSchema> = {};
   Object.entries(windowsTerminalSchema).forEach(([key, value]) => {
     if (isWindowsTerminalColorSchemaKey(key)) {
-      vscodeSchema[vSCodeColorSchemaByWindowsTerminalColorSchema[key]] = value;
+      vscodeSchema[VSCodeColorSchemaByWindowsTerminalColorSchema[key]] = value;
     }
   });
   return vscodeSchema;
 };
+
+const headerLogoSize = 42;
 
 function App() {
   const [inputtedText, setInputtedText] = useState<string>('');
@@ -88,17 +90,17 @@ function App() {
         <header className="App-header">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/51/Windows_Terminal_logo.svg"
-            className="App-logo pure-img"
+            className="pure-img"
             alt="logo"
-            width={42}
-            height={42}
+            width={headerLogoSize}
+            height={headerLogoSize}
           />
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg"
-            className="App-logo pure-img"
+            className="eader-logo pure-img"
             alt="logo"
-            width={42}
-            height={42}
+            width={headerLogoSize}
+            height={headerLogoSize}
           />
         </header>
         <main className="site-content">
