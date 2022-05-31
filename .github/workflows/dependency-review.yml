@@ -4,6 +4,7 @@ on:
     paths:
       - 'package.json'
       - 'package-lock.json'
+      - 'dependency-review.yml'
 
 permissions:
   contents: read
