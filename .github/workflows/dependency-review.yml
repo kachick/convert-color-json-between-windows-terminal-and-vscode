@@ -2,9 +2,9 @@ name: 'Dependency Review'
 on:
   pull_request:
     paths:
+      - '.github/workflows/dependency-review.yml'
       - 'package.json'
       - 'package-lock.json'
-      - 'dependency-review.yml'
 
 permissions:
   contents: read
