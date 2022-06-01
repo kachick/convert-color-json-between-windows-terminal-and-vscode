@@ -6,7 +6,8 @@ name: Deploy to Firebase Hosting on PR
   pull_request:
     paths-ignore:
       - '.github/dependabot.yml'
-      - 'MIT-LICENSE.txt'
+      - '.github/workflows/dependency-review.yml'
+      - '.github/workflows/auto-merge-dependabot-prs.yml'
       - '.editorconfig'
       - 'README.md'
       - '.vscode/**'
@@ -15,7 +16,7 @@ name: Deploy to Firebase Hosting on PR
 jobs:
   build_and_preview:
     if: ${{ (github.event.pull_request.head.repo.full_name == github.repository) && (github.actor != 'dependabot[bot]') }}
-    needs: ['test', 'dependency-review']
+    needs: ['test']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
