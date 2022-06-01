@@ -9,7 +9,6 @@ permissions:
 
 jobs:
   auto-merge-dependabot-prs:
-    needs: ['test', 'dependency-review']
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
