@@ -2,10 +2,12 @@
   "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "lib": [
-      "DOM", "DOM.Iterable", "es2022"
+      "DOM",
+      "DOM.Iterable",
+      "es2022"
     ],
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "*.config.ts"],
+  "include": ["src", "*.config.ts"]
 }

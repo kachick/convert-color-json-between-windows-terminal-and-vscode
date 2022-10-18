@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "skipLibCheck": false,
+    "skipLibCheck": false
   },
-  "include": ["vite.config.ts"],
+  "include": ["vite.config.ts"]
 }
