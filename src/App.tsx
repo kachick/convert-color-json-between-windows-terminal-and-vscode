@@ -59,6 +59,8 @@ function App() {
   const convertWindowsTerminalToVSCode = () => {
     let inputtedJSON;
     try {
+      // TODO: Integrate zod
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       inputtedJSON = JSON.parse(inputtedText);
     } catch (e) {
       if (e instanceof SyntaxError) {
@@ -68,12 +70,16 @@ function App() {
     if (inputtedJSON) {
       let want;
       if ('schemes' in inputtedJSON) {
+        // TODO: Integrate zod
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const { schemes }: { schemes: WindowsTerminalColorSchema[] } = inputtedJSON;
         want = schemes.map((scheme) => ({
           'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(scheme),
         }));
       } else {
         want = {
+          // TODO: Integrate zod
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(inputtedJSON),
         };
       }
@@ -136,7 +142,7 @@ function App() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                navigator.clipboard.writeText(outputText).then(() => setIsVisibleCopied(true));
+                void navigator.clipboard.writeText(outputText).then(() => setIsVisibleCopied(true));
               }}
               className='pure-u-1-3 pure-button pure-button-primary button-next'
             >
