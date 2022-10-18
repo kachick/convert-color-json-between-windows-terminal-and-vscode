@@ -2,21 +2,12 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    'jest/globals': true,
   },
   plugins: ['deprecation', '@typescript-eslint', 'import'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:@typescript-eslint/strict',
-  ],
-  overrides: [
-    {
-      files: ['__tests__/**/*.ts'],
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended'],
-      rules: { 'filenames/match-regex': 'off' },
-    },
   ],
   rules: {
     'i18n-text/no-en': 'off',
