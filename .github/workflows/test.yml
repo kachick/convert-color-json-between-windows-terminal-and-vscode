@@ -1,12 +1,12 @@
 name: Test & Lint
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
       - '.github/dependabot.yml'
       - 'LICENSE'
       - '.editorconfig'
-      - '.prettierrc'
+      - 'dprint.json'
       - '.eslintrc.js'
       - 'README.md'
       - '.vscode/**'
@@ -15,7 +15,7 @@ on:
       - '.github/dependabot.yml'
       - 'LICENSE'
       - '.editorconfig'
-      - '.prettierrc'
+      - 'dprint.json'
       - '.eslintrc.js'
       - 'README.md'
       - '.vscode/**'
@@ -47,4 +47,4 @@ jobs:
       - name: Build # No test exists. So compiling is the all
         run: npm run build
       - name: Lint
-        run: npm run prettier-check && npm run eslint
+        run: npm run eslint
