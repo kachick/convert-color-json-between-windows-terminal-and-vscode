@@ -18,6 +18,7 @@ jobs:
     outputs:
       tool-versions: '${{ steps.parse.outputs.json }}'
   format:
+    needs: [asdf-parser]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
