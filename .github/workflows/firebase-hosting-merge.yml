@@ -7,32 +7,26 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - main
 jobs:
+  asdf-parser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: kachick/action-parse-asdf-tool-versions@v1
+        id: parse
+    outputs:
+      tool-versions: '${{ steps.parse.outputs.json }}'
   build_and_deploy:
+    needs: [asdf-parser]
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: antongolub/action-setup-bun@v1
         with:
-          node-version: 18
-      - name: Get npm cache directory
-        id: npm-cache-dir
-        run: |
-          echo "::set-output name=dir::$(npm config get cache)"
-      - uses: actions/cache@v3
-        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - if: ${{ steps.npm-cache.outputs.cache-hit == 'false' }}
-        name: List the state of node modules
-        continue-on-error: true
-        run: npm list
-      - name: install dependencies
-        run: npm ci
-      - run: 'npm run build'
+          bun-version: '${{ fromJson(needs.asdf-parser.outputs.tool-versions).bun }}'
+      - run: bun install
+      - run: bun run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
