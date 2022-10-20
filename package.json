@@ -5,11 +5,11 @@
   "author": "Kenichi Kamiya <kachick1@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "eslint": "eslint --ignore-pattern \"src/**/*d.ts\" src/**/*.{ts,tsx}",
-    "eslint:fix": "eslint --ignore-pattern \"src/**/*d.ts\" --fix  src/**/*.{ts,tsx}"
+    "dev": "bun run vite",
+    "build": "bun run tsc && bun run vite build",
+    "preview": "bun run vite preview",
+    "eslint": "bun run eslint --ignore-pattern \"src/**/*d.ts\" src/**/*.{ts,tsx}",
+    "eslint:fix": "bun run eslint --ignore-pattern \"src/**/*d.ts\" --fix  src/**/*.{ts,tsx}"
   },
   "dependencies": {
     "react": "^18.2.0",
