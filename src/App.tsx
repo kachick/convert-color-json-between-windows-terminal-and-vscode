@@ -125,6 +125,7 @@ function App() {
     }
 
     setOutputText(JSON.stringify(want, null, 4));
+    setErrors([]);
     setIsVisibleConvertedJSON(true);
   };
 
