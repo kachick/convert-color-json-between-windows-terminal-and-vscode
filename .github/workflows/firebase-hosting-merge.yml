@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
+      - name: Wait other jobs
+        uses: kachick/wait-other-jobs@v1
+        timeout-minutes: 15
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:

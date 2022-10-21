@@ -18,6 +18,11 @@ jobs:
     if: ${{ (github.event.pull_request.head.repo.full_name == github.repository) && (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     steps:
+      - name: Wait other jobs
+        uses: kachick/wait-other-jobs@v1
+        timeout-minutes: 15
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
