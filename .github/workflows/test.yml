@@ -44,7 +44,9 @@ jobs:
         run: npm list
       - name: install dependencies
         run: npm ci
-      - name: Build # No test exists. So compiling is the all
+      - name: Test
+        run: npm run test
+      - name: Build
         run: npm run build
       - name: Lint
         run: npm run eslint

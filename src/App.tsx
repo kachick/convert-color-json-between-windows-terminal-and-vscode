@@ -1,51 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-
-type ValueOf<T> = T[keyof T];
-
-const VSCodeColorSchemaByWindowsTerminalColorSchema = {
-  background: 'terminal.background',
-  foreground: 'terminal.foreground',
-  black: 'terminal.ansiBlack',
-  blue: 'terminal.ansiBlue',
-  brightBlack: 'terminal.ansiBrightblack',
-  brightBlue: 'terminal.ansiBrightblue',
-  brightCyan: 'terminal.ansiBrightcyan',
-  brightGreen: 'terminal.ansiBrightgreen',
-  brightPurple: 'terminal.ansiBrightpurple',
-  brightRed: 'terminal.ansiBrightred',
-  brightWhite: 'terminal.ansiBrightwhite',
-  brightYellow: 'terminal.ansiBrightyellow',
-  cyan: 'terminal.ansiCyan',
-  green: 'terminal.ansiGreen',
-  purple: 'terminal.ansiPurple',
-  red: 'terminal.ansiRed',
-  white: 'terminal.ansiWhite',
-  yellow: 'terminal.ansiYellow',
-} as const;
-
-type WindowsTerminalColorSchema = {
-  [K in keyof typeof VSCodeColorSchemaByWindowsTerminalColorSchema]: string;
-};
-type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
-const isWindowsTerminalColorSchemaKey = (key: string): key is WindowsTerminalColorSchemaKeys =>
-  key in VSCodeColorSchemaByWindowsTerminalColorSchema;
-
-type VSCodeColorSchema = {
-  [K in ValueOf<typeof VSCodeColorSchemaByWindowsTerminalColorSchema>]: string;
-};
-
-const convertWindowsTerminalSchemaToVSCodeSchema = (
-  windowsTerminalSchema: Partial<WindowsTerminalColorSchema>,
-) => {
-  const vscodeSchema: Partial<VSCodeColorSchema> = {};
-  Object.entries(windowsTerminalSchema).forEach(([key, value]) => {
-    if (isWindowsTerminalColorSchemaKey(key)) {
-      vscodeSchema[VSCodeColorSchemaByWindowsTerminalColorSchema[key]] = value;
-    }
-  });
-  return vscodeSchema;
-};
+import { safeConvertWindowsTerminalToVSCode } from './converter';
 
 const headerLogoSize = 42;
 
@@ -56,36 +11,19 @@ function App() {
   const [errors, setErrors] = useState<Error[]>([]);
   const [isVisibleCopied, setIsVisibleCopied] = useState<boolean>(false);
 
-  const convertWindowsTerminalToVSCode = () => {
-    let inputtedJSON;
-    try {
-      // TODO: Integrate zod
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      inputtedJSON = JSON.parse(inputtedText);
-    } catch (e) {
-      if (e instanceof SyntaxError) {
-        setErrors([e]);
-      }
-    }
-    if (inputtedJSON) {
-      let want;
-      if ('schemes' in inputtedJSON) {
-        // TODO: Integrate zod
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const { schemes }: { schemes: WindowsTerminalColorSchema[] } = inputtedJSON;
-        want = schemes.map((scheme) => ({
-          'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(scheme),
-        }));
-      } else {
-        want = {
-          // TODO: Integrate zod
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(inputtedJSON),
-        };
-      }
-      setOutputText(JSON.stringify(want, null, 4));
-      setErrors([]);
+  const onChangeForm = () => {
+    const { success, data, errors: converterErrors } = safeConvertWindowsTerminalToVSCode(inputtedText);
+
+    if (success) {
+      setOutputText(JSON.stringify(data, null, 4));
+      setIsVisibleCopied(true);
       setIsVisibleConvertedJSON(true);
+      setErrors([]);
+    } else {
+      setOutputText('');
+      setIsVisibleCopied(false);
+      setIsVisibleConvertedJSON(false);
+      setErrors(converterErrors);
     }
   };
 
@@ -115,7 +53,9 @@ function App() {
               rows={25}
               cols={60}
               placeholder='Take from Windows Terminal. Paste your whole settings.json or the color schema part.'
-              onChange={(e) => setInputtedText(e.currentTarget.value)}
+              onChange={(e) => {
+                setInputtedText(e.currentTarget.value);
+              }}
               required={true}
               className='pure-input pure-u-1-1 original-json'
             >
@@ -124,9 +64,7 @@ function App() {
               disabled={!inputtedText}
               onClick={(e) => {
                 e.preventDefault();
-                setIsVisibleConvertedJSON(false);
-                setIsVisibleCopied(false);
-                convertWindowsTerminalToVSCode();
+                onChangeForm();
               }}
               className='pure-u-1-3 pure-button convert-button pure-button-primary button-next'
             >
