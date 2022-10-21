@@ -1,9 +1,16 @@
 import { useState } from 'react';
+import { z } from 'zod';
 import './App.css';
 
 type ValueOf<T> = T[keyof T];
 
-const VSCodeColorSchemaByWindowsTerminalColorSchema = {
+// https://github.com/colinhacks/zod/tree/20a45a20a344c48fc8cd1b630adcb822d439e70d#json-type
+const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
+type Literal = z.infer<typeof literalSchema>;
+type Json = Literal | { [key: string]: Json } | Json[];
+const jsonSchema: z.ZodType<Json> = z.lazy(() => z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]));
+
+const VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey = {
   background: 'terminal.background',
   foreground: 'terminal.foreground',
   black: 'terminal.ansiBlack',
@@ -24,28 +31,56 @@ const VSCodeColorSchemaByWindowsTerminalColorSchema = {
   yellow: 'terminal.ansiYellow',
 } as const;
 
-type WindowsTerminalColorSchema = {
-  [K in keyof typeof VSCodeColorSchemaByWindowsTerminalColorSchema]: string;
-};
+const WindowsTerminalColorSchema = z.object({
+  background: z.string(),
+  foreground: z.string(),
+  black: z.string(),
+  blue: z.string(),
+  brightBlack: z.string(),
+  brightBlue: z.string(),
+  brightCyan: z.string(),
+  brightGreen: z.string(),
+  brightPurple: z.string(),
+  brightRed: z.string(),
+  brightWhite: z.string(),
+  brightYellow: z.string(),
+  cyan: z.string(),
+  green: z.string(),
+  purple: z.string(),
+  red: z.string(),
+  white: z.string(),
+  yellow: z.string(),
+});
+
+const WindowsTerminalSchema = z.object({
+  schemes: z.array(WindowsTerminalColorSchema),
+});
+
+type WindowsTerminalColorSchema = z.infer<typeof WindowsTerminalColorSchema>;
+
 type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
 const isWindowsTerminalColorSchemaKey = (key: string): key is WindowsTerminalColorSchemaKeys =>
-  key in VSCodeColorSchemaByWindowsTerminalColorSchema;
+  key in VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey;
 
 type VSCodeColorSchema = {
-  [K in ValueOf<typeof VSCodeColorSchemaByWindowsTerminalColorSchema>]: string;
+  [K in ValueOf<typeof VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey>]: string;
 };
 
 const convertWindowsTerminalSchemaToVSCodeSchema = (
-  windowsTerminalSchema: Partial<WindowsTerminalColorSchema>,
+  windowsTerminalSchema: Readonly<Partial<WindowsTerminalColorSchema>>,
 ) => {
   const vscodeSchema: Partial<VSCodeColorSchema> = {};
   Object.entries(windowsTerminalSchema).forEach(([key, value]) => {
     if (isWindowsTerminalColorSchemaKey(key)) {
-      vscodeSchema[VSCodeColorSchemaByWindowsTerminalColorSchema[key]] = value;
+      vscodeSchema[VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey[key]] = value;
     }
   });
   return vscodeSchema;
 };
+
+interface OutputSchema {
+  'workbench.colorCustomizations': ReturnType<typeof convertWindowsTerminalSchemaToVSCodeSchema>;
+}
 
 const headerLogoSize = 42;
 
@@ -57,36 +92,40 @@ function App() {
   const [isVisibleCopied, setIsVisibleCopied] = useState<boolean>(false);
 
   const convertWindowsTerminalToVSCode = () => {
-    let inputtedJSON;
+    let inputtedJSON: unknown;
     try {
-      // TODO: Integrate zod
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       inputtedJSON = JSON.parse(inputtedText);
     } catch (e) {
       if (e instanceof SyntaxError) {
         setErrors([e]);
       }
     }
-    if (inputtedJSON) {
-      let want;
-      if ('schemes' in inputtedJSON) {
-        // TODO: Integrate zod
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const { schemes }: { schemes: WindowsTerminalColorSchema[] } = inputtedJSON;
-        want = schemes.map((scheme) => ({
-          'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(scheme),
-        }));
-      } else {
-        want = {
-          // TODO: Integrate zod
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(inputtedJSON),
-        };
-      }
-      setOutputText(JSON.stringify(want, null, 4));
-      setErrors([]);
-      setIsVisibleConvertedJSON(true);
+
+    const maybeJson = jsonSchema.safeParse(inputtedJSON);
+    if (!maybeJson.success) {
+      setErrors([maybeJson.error]);
+      return;
     }
+    let want: OutputSchema | OutputSchema[];
+    const maybeWholeSchema = WindowsTerminalSchema.safeParse(maybeJson.data);
+    if (maybeWholeSchema.success) {
+      want = maybeWholeSchema.data.schemes.map((scheme) => ({
+        'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(scheme),
+      }));
+    } else {
+      const maybeColorSchema = WindowsTerminalColorSchema.safeParse(maybeJson.data);
+      if (maybeColorSchema.success) {
+        want = {
+          'workbench.colorCustomizations': convertWindowsTerminalSchemaToVSCodeSchema(maybeColorSchema.data),
+        };
+      } else {
+        setErrors([maybeWholeSchema.error, maybeColorSchema.error]);
+        return;
+      }
+    }
+
+    setOutputText(JSON.stringify(want, null, 4));
+    setIsVisibleConvertedJSON(true);
   };
 
   return (
