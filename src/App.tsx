@@ -98,6 +98,7 @@ function App() {
     } catch (e) {
       if (e instanceof SyntaxError) {
         setErrors([e]);
+        return;
       }
     }
 
