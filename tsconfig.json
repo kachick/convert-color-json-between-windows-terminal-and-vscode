@@ -1,5 +1,5 @@
 {
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
   "compilerOptions": {
     // https://www.typescriptlang.org/docs/handbook/esm-node.html
     "module": "node16",
@@ -10,6 +10,8 @@
     ],
     "noEmit": true,
     "jsx": "react-jsx",
+    "composite": true,
+    "skipLibCheck": true,
     "strictNullChecks": true
   },
   "include": ["**/*.ts", "**/*.tsx"]
