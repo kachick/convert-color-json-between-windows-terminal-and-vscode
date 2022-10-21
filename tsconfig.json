@@ -1,6 +1,8 @@
 {
   "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
+    // https://www.typescriptlang.org/docs/handbook/esm-node.html
+    "module": "node16",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -10,5 +12,5 @@
     "jsx": "react-jsx",
     "strictNullChecks": true
   },
-  "include": ["src", "*.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

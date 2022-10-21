@@ -5,6 +5,7 @@
   "author": "Kenichi Kamiya <kachick1@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test": "ts-node-test test/*.test.ts",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",

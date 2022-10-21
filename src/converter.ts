@@ -29,7 +29,7 @@ const VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey = {
   yellow: 'terminal.ansiYellow',
 } as const;
 
-const WindowsTerminalColorSchema = z.object({
+export const WindowsTerminalColorSchema = z.object({
   background: z.string(),
   foreground: z.string(),
   black: z.string(),
@@ -48,17 +48,25 @@ const WindowsTerminalColorSchema = z.object({
   red: z.string(),
   white: z.string(),
   yellow: z.string(),
+
+  // Should be ignored in parser below
+  cursorColor: z.optional(z.string()),
+  name: z.optional(z.string()),
+  selectionBackground: z.optional(z.string()),
 });
+
+export type WindowsTerminalColorSchema = z.infer<typeof WindowsTerminalColorSchema>;
 
 const WindowsTerminalSchema = z.object({
   schemes: z.array(WindowsTerminalColorSchema),
 });
 
-type WindowsTerminalColorSchema = z.infer<typeof WindowsTerminalColorSchema>;
-
 type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
-const isWindowsTerminalColorSchemaKey = (key: string): key is WindowsTerminalColorSchemaKeys =>
-  key in VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey;
+const isConvertableWindowsTerminalColorSchemaKey = (
+  key: string,
+): key is Exclude<WindowsTerminalColorSchemaKeys, 'cursorColor' | 'name' | 'selectionBackground'> =>
+  (key in VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey) && key !== 'cursorColor' && key !== 'name'
+  && key !== 'selectionBackground';
 
 type VSCodeColorSchema = {
   [K in ValueOf<typeof VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey>]: string;
@@ -69,7 +77,7 @@ const convertWindowsTerminalSchemaToVSCodeSchema = (
 ) => {
   const vscodeSchema: Partial<VSCodeColorSchema> = {};
   Object.entries(windowsTerminalSchema).forEach(([key, value]) => {
-    if (isWindowsTerminalColorSchemaKey(key)) {
+    if (isConvertableWindowsTerminalColorSchemaKey(key)) {
       vscodeSchema[VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey[key]] = value;
     }
   });
