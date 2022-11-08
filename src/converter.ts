@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'https://deno.land/x/zod/mod.ts';
 
 type ValueOf<T> = T[keyof T];
 
