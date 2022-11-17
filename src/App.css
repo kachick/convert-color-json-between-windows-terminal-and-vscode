@@ -34,8 +34,12 @@
   font-size: calc(10px + 2vmin);
 }
 
-.convert-errors {
-  color: red;
+.convert-errors-summary {
+  color: #e17b34;
+}
+
+.convert-errors-item {
+  color: #6b7b6e;
 }
 
 .notice-copied {
