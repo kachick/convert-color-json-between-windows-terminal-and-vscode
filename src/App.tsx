@@ -60,13 +60,16 @@ function App() {
               className='pure-input pure-u-1-1 original-json'
             >
             </textarea>
+            <p></p>
             <button
               disabled={!inputtedText}
               onClick={(e) => {
                 e.preventDefault();
                 onChangeForm();
               }}
-              className='pure-u-1-3 pure-button convert-button pure-button-primary button-next'
+              className={`pure-u-1-3 pure-button ${isVisibleConvertedJSON ? '' : 'pure-button-primary'} ${
+                inputtedText ? 'pure-button-active' : 'pure-button-disabled'
+              } button-next`}
             >
               Convert!
             </button>
@@ -82,7 +85,7 @@ function App() {
                 e.preventDefault();
                 void navigator.clipboard.writeText(outputText).then(() => setIsVisibleCopied(true));
               }}
-              className='pure-u-1-3 pure-button pure-button-primary button-next'
+              className='pure-u-1-3 pure-button pure-button-primary pure-button-active button-next'
             >
               Copy!
             </button>
