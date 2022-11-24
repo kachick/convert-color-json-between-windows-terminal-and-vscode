@@ -1,5 +1,5 @@
 import test from 'node:test';
-import { equal, deepEqual } from 'node:assert';
+import { equal as strictEqual, deepEqual as strictDeepEqual } from 'node:assert';
 
 import { safeConvertWindowsTerminalToVSCode, WindowsTerminalColorSchema } from '../src/converter';
 
@@ -55,17 +55,17 @@ void test('converter', async (t) => {
     const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
       JSON.stringify(validWindowsTerminalColorSchema),
     );
-    equal(true, success);
-    deepEqual([], errors);
-    deepEqual(shouldBe, data);
+    strictEqual(true, success);
+    strictDeepEqual([], errors);
+    strictDeepEqual(shouldBe, data);
   });
 
   await t.test('when given an invalid json', () => {
     const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
       '4, 2',
     );
-    equal(false, success);
-    equal(1, errors.length);
-    equal(null, data);
+    strictEqual(false, success);
+    strictEqual(1, errors.length);
+    strictEqual(null, data);
   });
 });
