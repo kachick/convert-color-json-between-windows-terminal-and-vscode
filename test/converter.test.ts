@@ -55,17 +55,17 @@ void test('converter', async (t) => {
     const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
       JSON.stringify(validWindowsTerminalColorSchema),
     );
-    strictEqual(true, success);
-    strictDeepEqual([], errors);
-    strictDeepEqual(shouldBe, data);
+    strictEqual(success, true);
+    strictDeepEqual(errors, []);
+    strictDeepEqual(data, shouldBe);
   });
 
   await t.test('when given an invalid json', () => {
     const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
       '4, 2',
     );
-    strictEqual(false, success);
-    strictEqual(1, errors.length);
-    strictEqual(null, data);
+    strictEqual(success, false);
+    strictEqual(errors.length, 1);
+    strictEqual(data, null);
   });
 });
