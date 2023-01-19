@@ -3,7 +3,6 @@
 pkgs.mkShell {
   buildInputs = [
     pkgs.deno
-    pkgs.unbuffer # To keep color in tee of local development
     pkgs.direnv
     pkgs.dprint
     pkgs.nil
