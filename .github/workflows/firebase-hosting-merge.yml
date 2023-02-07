@@ -7,17 +7,7 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - main
 jobs:
-  asdf-parser:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v3
-      - uses: kachick/action-parse-asdf-tool-versions@v3
-        id: parse
-    outputs:
-      tool-versions: '${{ steps.parse.outputs.json }}'
   build_and_deploy:
-    needs: [asdf-parser]
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
@@ -25,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-          node-version: '${{ fromJson(needs.asdf-parser.outputs.tool-versions).nodejs }}'
+          node-version: 18
       - name: install dependencies
         run: npm ci --ignore-scripts
       - run: 'npm run build'

@@ -4,11 +4,8 @@
     "github>kachick/renovate-config-dprint:plugins"
   ],
   "labels": ["dependencies", "renovate"],
-  "enabledManagers": ["asdf", "regex"],
-  "packageRules": [
-    {
-      "matchPackageNames": ["node"],
-      "allowedVersions": "/^v?18\\./"
-    }
-  ]
+  "enabledManagers": ["nix", "regex"],
+  "nix": {
+    "enabled": true
+  }
 }
