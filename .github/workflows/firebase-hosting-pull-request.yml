@@ -14,17 +14,7 @@ name: Deploy to Firebase Hosting on PR
       - 'dprint.json'
       - '.eslintrc.js'
 jobs:
-  asdf-parser:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v3
-      - uses: kachick/action-parse-asdf-tool-versions@v3
-        id: parse
-    outputs:
-      tool-versions: '${{ steps.parse.outputs.json }}'
   build_and_preview:
-    needs: [asdf-parser]
     if: ${{ (github.event.pull_request.head.repo.full_name == github.repository) && (github.actor != 'dependabot[bot]') && (github.actor != 'renovate[bot]') }}
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-          node-version: '${{ fromJson(needs.asdf-parser.outputs.tool-versions).nodejs }}'
+          node-version: 18
       - name: install dependencies
         run: npm ci --ignore-scripts
       - run: 'npm run build'
