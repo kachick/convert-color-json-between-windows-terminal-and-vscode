@@ -20,7 +20,7 @@
   "devDependencies": {
     "@tsconfig/node18-strictest-esm": "^1.0.1",
     "@types/node": "^18.15.3",
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.0.30",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
