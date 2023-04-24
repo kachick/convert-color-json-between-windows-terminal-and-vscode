@@ -28,6 +28,6 @@
     "eslint-plugin-deprecation": "^1.4.1",
     "ts-node-test": "^0.4.1",
     "typescript": "^5.0.4",
-    "vite": "^4.2.1"
+    "vite": "^4.3.1"
   }
 }
