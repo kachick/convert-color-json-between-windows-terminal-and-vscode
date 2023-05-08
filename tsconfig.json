@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.mts", "**/*.tsx"]
 }
