@@ -19,5 +19,14 @@
       "deno.unstable"
     ],
     "types": ["vite/client"]
+  },
+  "fmt": {
+    "files": {
+      "exclude": [".git/", ".node_modules/", "dist/", ".vite"]
+    },
+    "options": {
+      "singleQuote": true,
+      "proseWrap": "preserve"
+    }
   }
 }
