@@ -21,12 +21,9 @@
     "types": ["vite/client"]
   },
   "fmt": {
-    "files": {
-      "exclude": [".git/", ".node_modules/", "dist/", ".vite"]
-    },
-    "options": {
-      "singleQuote": true,
-      "proseWrap": "preserve"
-    }
+    "exclude": [".git/", ".node_modules/", "dist/", ".vite"],
+    "lineWidth": 120,
+    "singleQuote": true,
+    "proseWrap": "preserve"
   }
 }

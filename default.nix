@@ -5,6 +5,5 @@ pkgs.mkShell {
     pkgs.nil
     pkgs.nixpkgs-fmt
     pkgs.deno
-    pkgs.dprint
   ];
 }
