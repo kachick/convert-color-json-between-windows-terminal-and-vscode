@@ -1,7 +1,7 @@
 /// <reference lib="dom"/>
 
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { StrictMode } from 'https://esm.sh/react@18.2.0';
+import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
 import App from './App.tsx';
 import './index.css';
 import { assertIsDefined } from './typeguards.ts';

@@ -8,9 +8,17 @@
   },
   "imports": {
     "vite": "npm:vite@^4.3.5",
-    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.0.0",
-    "react": "npm:react@^18.2.0",
-    "react-dom/client": "npm:react-dom@^18.2.0/client",
-    "zod": "npm:zod@^3.21.4"
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.0.0"
+  },
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns",
+      "deno.unstable"
+    ],
+    "types": ["vite/client"]
   }
 }
