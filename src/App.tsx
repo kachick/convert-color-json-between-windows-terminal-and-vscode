@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { safeConvertWindowsTerminalToVSCode } from './converter';
+import { safeConvertWindowsTerminalToVSCode } from './converter.ts';
 
 const headerLogoSize = 42;
 

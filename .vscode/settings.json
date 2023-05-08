@@ -11,5 +11,6 @@
   "deno.enable": true,
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  },
+  "deno.unstable": true
 }

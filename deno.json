@@ -7,6 +7,10 @@
     "serve": "deno run --allow-net --allow-read https://deno.land/std@0.186.0/http/file_server.ts dist/"
   },
   "imports": {
+    "vite": "npm:vite@^4.3.5",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.0.0",
+    "react": "npm:react@^18.2.0",
+    "react-dom/client": "npm:react-dom@^18.2.0/client",
     "zod": "npm:zod@^3.21.4"
   }
 }

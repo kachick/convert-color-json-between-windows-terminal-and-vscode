@@ -1,8 +1,8 @@
-import { defineConfig } from 'npm:vite@^4.3.5';
-import react from 'npm:@vitejs/plugin-react@^4.0.0';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-import 'npm:react@^18.2.0';
-import 'npm:react-dom@^18.2.0/client';
+// import 'npm:react@^18.2.0';
+// import 'npm:react-dom@^18.2.0/client';
 
 //  Don't use https://esm.sh/ and https://deno.land/x as import 'https://deno.land/x/zod@v3.21.4/mod.ts';
 // Because of using as it returns unexpected MIME type :<
