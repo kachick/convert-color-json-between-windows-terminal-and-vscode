@@ -25,5 +25,11 @@
     "lineWidth": 120,
     "singleQuote": true,
     "proseWrap": "preserve"
+  },
+  "lint": {
+    "exclude": [".git/", ".node_modules/", "dist/", ".vite"],
+    "rules": {
+      "tags": ["recommended"]
+    }
   }
 }
