@@ -5,9 +5,6 @@
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
-  "cSpell.words": [
-    "dprint"
-  ],
   "deno.enable": true,
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
