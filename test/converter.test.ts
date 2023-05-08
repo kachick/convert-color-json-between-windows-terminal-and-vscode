@@ -1,10 +1,8 @@
-import test from 'node:test';
-import { equal as strictEqual, deepEqual as strictDeepEqual } from 'node:assert';
+import { assertEquals } from "https://deno.land/std@0.186.0/testing/asserts.ts";
 
-import { safeConvertWindowsTerminalToVSCode, WindowsTerminalColorSchema } from '../src/converter';
+import { safeConvertWindowsTerminalToVSCode, WindowsTerminalColorSchema } from '../src/converter.ts';
 
-void test('converter', async (t) => {
-  await t.test('when given a valid config', () => {
+Deno.test('when given a valid config', () => {
     const validWindowsTerminalColorSchema: WindowsTerminalColorSchema = {
       'background': '#0C0C0C',
       'black': '#0C0C0C',
@@ -55,17 +53,17 @@ void test('converter', async (t) => {
     const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
       JSON.stringify(validWindowsTerminalColorSchema),
     );
-    strictEqual(success, true);
-    strictDeepEqual(errors, []);
-    strictDeepEqual(data, shouldBe);
-  });
+    assertEquals(success, true);
+    assertEquals(errors, []);
+    assertEquals(data, shouldBe);
+})
 
-  await t.test('when given an invalid json', () => {
-    const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
-      '4, 2',
-    );
-    strictEqual(success, false);
-    strictEqual(errors.length, 1);
-    strictEqual(data, null);
-  });
+Deno.test('when given an invalid json', () => {
+  const { success, data, errors } = safeConvertWindowsTerminalToVSCode(
+    '4, 2',
+  );
+  assertEquals(success, false);
+  assertEquals(errors.length, 1);
+  assertEquals(data, null);
 });
+
