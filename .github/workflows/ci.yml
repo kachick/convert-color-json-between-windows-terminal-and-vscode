@@ -20,15 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: denoland/setup-deno@v1
         with:
-          cache: npm
-          node-version: 18
-      - name: install dependencies
-        run: npm ci --ignore-scripts
-      - name: Test
-        run: npm run test
-      - name: Build
-        run: npm run build
-      - name: Lint
-        run: npm run eslint
+          deno-version: v1.33.2
+      - run: deno fmt --check
+      - run: deno lint
+      - run: deno check
+      - run: deno test
