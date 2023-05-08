@@ -12,13 +12,10 @@ jobs:
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: denoland/setup-deno@v1
         with:
-          cache: npm
-          node-version: 18
-      - name: install dependencies
-        run: npm ci --ignore-scripts
-      - run: 'npm run build'
+          deno-version: v1.33.2
+      - run: deno task build
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v1
         timeout-minutes: 15

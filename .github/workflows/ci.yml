@@ -6,8 +6,6 @@ on:
       - '.github/dependabot.yml'
       - 'LICENSE'
       - '.editorconfig'
-      - 'dprint.json'
-      - '.eslintrc.js'
       - 'README.md'
       - '.vscode/**'
   pull_request:
@@ -15,24 +13,21 @@ on:
       - '.github/dependabot.yml'
       - 'LICENSE'
       - '.editorconfig'
-      - 'dprint.json'
-      - '.eslintrc.js'
       - 'README.md'
       - '.vscode/**'
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: denoland/setup-deno@v1
         with:
-          cache: npm
-          node-version: 18
-      - name: install dependencies
-        run: npm ci --ignore-scripts
-      - name: Test
-        run: npm run test
-      - name: Build
-        run: npm run build
+          deno-version: v1.33.2
+      - name: Format
+        run: deno fmt --check
       - name: Lint
-        run: npm run eslint
+        run: deno lint
+      - name: Typecheck
+        run: deno check src/main.tsx
+      - name: Test
+        run: deno test

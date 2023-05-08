@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import './App.css';
-import { safeConvertWindowsTerminalToVSCode } from './converter';
+import React, { useState } from 'https://esm.sh/react@18.2.0';
+import { safeConvertWindowsTerminalToVSCode } from './converter.ts';
 
 const headerLogoSize = 42;
 

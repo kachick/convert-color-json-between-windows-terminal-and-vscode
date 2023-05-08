@@ -1,9 +1,9 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
     "redhat.vscode-yaml",
     "editorconfig.editorconfig",
-    "dprint.dprint",
-    "jnoortheen.nix-ide"
+    "jnoortheen.nix-ide",
+    "github.vscode-github-actions",
+    "denoland.vscode-deno"
   ]
 }

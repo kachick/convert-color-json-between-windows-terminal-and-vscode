@@ -2,18 +2,21 @@
   // TODO: Use tsconfig/base after all tools support tsconfig.extends array
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    // https://www.typescriptlang.org/docs/handbook/esm-node.html
-    "module": "node16",
     "lib": [
       "DOM",
       "DOM.Iterable",
-      "es2022"
+      "es2022",
+      "deno.window"
     ],
+    "types": ["vite/client"],
+    "checkJs": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
     "composite": true,
     "skipLibCheck": true,
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.mts", "**/*.tsx"]
 }

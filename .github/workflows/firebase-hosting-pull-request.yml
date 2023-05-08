@@ -11,21 +11,16 @@ name: Deploy to Firebase Hosting on PR
       - '.editorconfig'
       - 'README.md'
       - '.vscode/**'
-      - 'dprint.json'
-      - '.eslintrc.js'
 jobs:
   build_and_preview:
     if: ${{ (github.event.pull_request.head.repo.full_name == github.repository) && (github.actor != 'dependabot[bot]') && (github.actor != 'renovate[bot]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: denoland/setup-deno@v1
         with:
-          cache: npm
-          node-version: 18
-      - name: install dependencies
-        run: npm ci --ignore-scripts
-      - run: 'npm run build'
+          deno-version: v1.33.2
+      - run: deno task build
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v1
         timeout-minutes: 15

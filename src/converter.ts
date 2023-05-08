@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'https://esm.sh/zod@3.21.4';
 
 type ValueOf<T> = T[keyof T];
 
@@ -65,8 +65,8 @@ type WindowsTerminalColorSchemaKeys = keyof WindowsTerminalColorSchema;
 const isConvertableWindowsTerminalColorSchemaKey = (
   key: string,
 ): key is Exclude<WindowsTerminalColorSchemaKeys, 'cursorColor' | 'name' | 'selectionBackground'> =>
-  (key in VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey) && key !== 'cursorColor' && key !== 'name'
-  && key !== 'selectionBackground';
+  (key in VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey) && key !== 'cursorColor' && key !== 'name' &&
+  key !== 'selectionBackground';
 
 type VSCodeColorSchema = {
   [K in ValueOf<typeof VSCodeColorSchemaKeyByWindowsTerminalColorSchemaKey>]: string;
