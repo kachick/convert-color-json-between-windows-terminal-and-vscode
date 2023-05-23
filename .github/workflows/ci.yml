@@ -23,6 +23,9 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.33.3
+      - run: |
+          deno task cache
+          deno task build
       - name: Format
         run: deno fmt --check
       - name: Lint

@@ -15,7 +15,9 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.33.3
-      - run: deno task build
+      - run: |
+          deno task cache
+          deno task build
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v1
         timeout-minutes: 15
