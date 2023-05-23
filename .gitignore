@@ -103,3 +103,6 @@ dist
 *.tsbuildinfo
 
 .vite/
+
+# I don't have confident ignoring the lockfile is better way or not in deno...
+deno.lock
