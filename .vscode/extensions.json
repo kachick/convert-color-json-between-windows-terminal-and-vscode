@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "redhat.vscode-yaml",
     "editorconfig.editorconfig",
     "tekumara.typos-vscode",
     "jnoortheen.nix-ide",
