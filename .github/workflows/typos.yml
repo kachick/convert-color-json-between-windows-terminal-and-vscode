@@ -1,0 +1,15 @@
+name: No Typo
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  typos:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # Keep same version as *.nix
+      - uses: crate-ci/typos@v1.14.11
