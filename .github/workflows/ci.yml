@@ -31,6 +31,6 @@ jobs:
       - name: Lint
         run: deno lint
       - name: Typecheck
-        run: deno check src/main.tsx
+        run: deno check src/main.tsx test/converter.test.ts
       - name: Test
         run: deno test
