@@ -1,4 +1,4 @@
-import { z } from 'https://esm.sh/zod@3.21.4';
+import { z } from 'https://esm.sh/v128/zod@3.21.4';
 
 type ValueOf<T> = T[keyof T];
 

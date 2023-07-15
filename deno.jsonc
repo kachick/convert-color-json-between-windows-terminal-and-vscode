@@ -1,0 +1,37 @@
+{
+  "tasks": {
+    "check": "typos . .github .vscode && deno fmt --check && deno lint && deno check src/**/*.ts* test/**/*.ts*",
+    "cache": "deno cache --node-modules-dir --reload npm:vite@4.4.4 *.config.*ts src/**/*.*ts* test/**/*.ts*",
+    "update": "deno cache --lock-write --node-modules-dir *.config.*ts src/**/*.*ts* test/**/*.ts*",
+    "dev": "deno run -A --node-modules-dir npm:vite@4.4.4",
+    "build": "deno run -A --node-modules-dir npm:vite@4.4.4 build",
+    "preview": "deno run -A --node-modules-dir npm:vite@4.4.4 preview",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.194.0/http/file_server.ts dist/",
+    "deps": "deno --version && nix --version && typos --version",
+    "all": "deno task deps && deno task check && deno task build"
+  },
+  "compilerOptions": {
+    // These setting does not resolve the issue in deno 1.35.1. Write each *.tsx
+    // "jsx": "react-jsx",
+    // "jsxImportSource": "https://esm.sh/v128/react@18.2.0",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns",
+      "deno.unstable"
+    ]
+  },
+  "fmt": {
+    "exclude": [".git/", ".node_modules/", "dist/", ".vite"],
+    "lineWidth": 120,
+    "singleQuote": true,
+    "proseWrap": "preserve"
+  },
+  "lint": {
+    "exclude": [".git/", ".node_modules/", "dist/", ".vite"],
+    "rules": {
+      "tags": ["recommended"]
+    }
+  }
+}

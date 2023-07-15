@@ -24,9 +24,8 @@ jobs:
         with:
           # Keep same version as *.nix
           deno-version: v1.35.1
-      - run: |
-          deno task cache
-          deno task build
+      - run: deno task cache
+      - run: deno task build
       - name: Format
         run: deno fmt --check
       - name: Lint
