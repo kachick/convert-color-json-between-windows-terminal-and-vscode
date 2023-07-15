@@ -1,3 +1,5 @@
+/** @jsxImportSource https://esm.sh/v128/react@18.2.0 */
+
 import React, { useState } from 'https://esm.sh/v128/react@18.2.0';
 import { safeConvertWindowsTerminalToVSCode } from './converter.ts';
 
@@ -5,7 +7,9 @@ const headerLogoSize = 42;
 
 function App() {
   const [inputtedText, setInputtedText] = useState<string>('');
-  const [isVisibleConvertedJSON, setIsVisibleConvertedJSON] = useState<boolean>(false);
+  const [isVisibleConvertedJSON, setIsVisibleConvertedJSON] = useState<boolean>(
+    false,
+  );
   const [outputText, setOutputText] = useState<string>('');
   const [errors, setErrors] = useState<Error[]>([]);
   const [isVisibleCopied, setIsVisibleCopied] = useState<boolean>(false);

@@ -5,11 +5,13 @@
     "https://deno.land/std@0.194.0/testing/_diff.ts": "1a3c044aedf77647d6cac86b798c6417603361b66b54c53331b312caeb447aea",
     "https://deno.land/std@0.194.0/testing/_format.ts": "a69126e8a469009adf4cf2a50af889aca364c349797e63174884a52ff75cf4c7",
     "https://deno.land/std@0.194.0/testing/asserts.ts": "056d571baaefc7f13af3e29ad6a66d4dbe5355d3cb2ae130e7d2a1b1e01085e3",
+    "https://esm.sh/stable/react@18.2.0/denonext/jsx-runtime.js": "54d8a51c6ca025380abd2d5302e4a9b38ff835d9759c4657e52314f587eaf6bf",
     "https://esm.sh/stable/react@18.2.0/denonext/react.mjs": "3c4f23bcfc53b256fcfaf6f834fa9f584c3bb7be667b2682c6cb6ba8ef88f8e6",
     "https://esm.sh/v128/react-dom@18.2.0/client": "64b1a974cc818447c291cdc18f32ffa1d2f142db1b343d1c3bd1d9762785c25a",
     "https://esm.sh/v128/react-dom@18.2.0/denonext/client.js": "04c17de4d1a4c89258ca034b40e2cef959df9fc9e26d7ec69afe23f62ac4923b",
     "https://esm.sh/v128/react-dom@18.2.0/denonext/react-dom.mjs": "a2ae6182d08dcf63e912149425f52ecb37e7bd888438effe49ea71a58f9ab748",
     "https://esm.sh/v128/react@18.2.0": "8950a34a030620fce8349d6bd3913b3bdb186c5ec7968fa5ba4d054e22d78e6c",
+    "https://esm.sh/v128/react@18.2.0/jsx-runtime": "914a55a07c388d345c5a0c11616ee5282242e8b8dfd0d505b83500ea04fd9870",
     "https://esm.sh/v128/scheduler@0.23.0/denonext/scheduler.mjs": "cdbc6d2823e2c6fffcb14501146ff2602a38c48d3c9dd9268f308e833ede2b49",
     "https://esm.sh/v128/zod@3.21.4": "615b6f2703c0b4a8acced7dc533cc266aa846457fd2d0a450117506afbaae791",
     "https://esm.sh/v128/zod@3.21.4/denonext/zod.mjs": "3e104633fb5d127189f1a38f52f5620a21ec8988d639b5adcf5a65be1cbbcc62"

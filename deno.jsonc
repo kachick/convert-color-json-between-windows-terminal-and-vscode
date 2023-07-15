@@ -11,6 +11,9 @@
     "all": "deno task deps && deno task check && deno task build"
   },
   "compilerOptions": {
+    // These setting does not resolve the issue in deno 1.35.1. Write each *.tsx
+    // "jsx": "react-jsx",
+    // "jsxImportSource": "https://esm.sh/v128/react@18.2.0",
     "lib": [
       "dom",
       "dom.iterable",

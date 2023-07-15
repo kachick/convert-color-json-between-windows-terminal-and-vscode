@@ -1,3 +1,4 @@
+/** @jsxImportSource https://esm.sh/v128/react@18.2.0 */
 /// <reference lib="dom"/>
 
 import React, { StrictMode } from 'https://esm.sh/v128/react@18.2.0';
