@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "redhat.vscode-yaml",
     "editorconfig.editorconfig",
+    "tekumara.typos-vscode",
     "jnoortheen.nix-ide",
     "github.vscode-github-actions",
     "denoland.vscode-deno"
