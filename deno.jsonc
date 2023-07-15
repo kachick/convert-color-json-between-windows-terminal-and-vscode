@@ -6,7 +6,7 @@
     "dev": "deno run -A --node-modules-dir npm:vite",
     "build": "deno run -A  --node-modules-dir npm:vite build",
     "preview": "deno run -A --node-modules-dir npm:vite preview",
-    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.186.0/http/file_server.ts dist/",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.194.0/http/file_server.ts dist/",
     "deps": "deno --version && nix --version && typos --version",
     "all": "deno task deps && deno task check && deno task build"
   },

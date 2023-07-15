@@ -1,4 +1,4 @@
-import { assertEquals } from 'https://deno.land/std@0.186.0/testing/asserts.ts';
+import { assertEquals } from 'https://deno.land/std@0.194.0/testing/asserts.ts';
 
 import { safeConvertWindowsTerminalToVSCode, WindowsTerminalColorSchema } from '../src/converter.ts';
 
