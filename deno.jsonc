@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "check": "typos . .github .vscode && deno fmt --check && deno lint && deno check src/**/*.ts* test/**/*.ts*",
-    "cache": "deno cache --reload --node-modules-dir src/**/*.*ts* test/**/*.ts*",
-    "update": "deno cache --lock-write --node-modules-dir src/**/*.*ts* test/**/*.ts*",
+    "check": "typos . .github .vscode && deno fmt --check && deno lint && deno check *.config.*ts src/**/*.ts* test/**/*.ts*",
+    "cache": "deno cache --reload --node-modules-dir *.config.*ts src/**/*.*ts* test/**/*.ts*",
+    "update": "deno cache --lock-write --node-modules-dir *.config.*ts src/**/*.*ts* test/**/*.ts*",
     "dev": "deno run -A --node-modules-dir npm:vite",
     "build": "deno run -A  --node-modules-dir npm:vite build",
     "preview": "deno run -A --node-modules-dir npm:vite preview",
