@@ -17,8 +17,7 @@
       "dom.asynciterable",
       "deno.ns",
       "deno.unstable"
-    ],
-    "types": ["vite/client"]
+    ]
   },
   "fmt": {
     "exclude": [".git/", ".node_modules/", "dist/", ".vite"],
