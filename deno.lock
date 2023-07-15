@@ -17,8 +17,7 @@
   "npm": {
     "specifiers": {
       "@vitejs/plugin-react@4.0.3": "@vitejs/plugin-react@4.0.3_vite@4.4.4_@babel+core@7.22.9",
-      "vite@4.4.4": "vite@4.4.4",
-      "vite@^4.3.5": "vite@4.4.4"
+      "vite@4.4.4": "vite@4.4.4"
     },
     "packages": {
       "@ampproject/remapping@2.2.1": {

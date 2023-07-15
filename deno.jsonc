@@ -10,10 +10,6 @@
     "deps": "deno --version && nix --version && typos --version",
     "all": "deno task deps && deno task check && deno task build"
   },
-  "imports": {
-    "vite": "npm:vite@^4.3.5",
-    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.0.0"
-  },
   "compilerOptions": {
     "lib": [
       "dom",
