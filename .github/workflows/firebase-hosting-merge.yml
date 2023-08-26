@@ -15,7 +15,7 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           # Keep same version as used in *.nix
-          deno-version: v1.35.1
+          deno-version: v1.36.0
       - run: |
           deno task cache
           deno task build
