@@ -22,8 +22,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
         with:
-          # Keep same version as *.nix
-          deno-version: v1.35.1
+          # Keep same version as used in *.nix
+          deno-version: v1.36.0
       - run: deno task cache
       - run: deno task build
       - name: Format
