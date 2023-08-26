@@ -1,11 +1,11 @@
 {
   "tasks": {
     "check": "typos . .github .vscode && deno fmt --check && deno lint && deno check src/**/*.ts* test/**/*.ts*",
-    "cache": "deno cache --node-modules-dir --reload npm:vite@4.4.4 *.config.*ts src/**/*.*ts* test/**/*.ts*",
+    "cache": "deno cache --node-modules-dir --reload npm:vite@4.4.9 *.config.*ts src/**/*.*ts* test/**/*.ts*",
     "update": "deno cache --lock-write --node-modules-dir *.config.*ts src/**/*.*ts* test/**/*.ts*",
-    "dev": "deno run -A --node-modules-dir npm:vite@4.4.4",
-    "build": "deno run -A --node-modules-dir npm:vite@4.4.4 build",
-    "preview": "deno run -A --node-modules-dir npm:vite@4.4.4 preview",
+    "dev": "deno run -A --node-modules-dir npm:vite@4.4.9",
+    "build": "deno run -A --node-modules-dir npm:vite@4.4.9 build",
+    "preview": "deno run -A --node-modules-dir npm:vite@4.4.9 preview",
     "serve": "deno run --allow-net --allow-read https://deno.land/std@0.194.0/http/file_server.ts dist/",
     "deps": "deno --version && nix --version && typos --version",
     "all": "deno task deps && deno task check && deno task build"
