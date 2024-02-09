@@ -27,7 +27,12 @@ jobs:
         uses: kachick/wait-other-jobs@v2
         timeout-minutes: 15
         with:
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          skip-list: |
+            [
+              {
+                "workflowFile": "merge-bot-pr.yml"
+              }
+            ]
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
