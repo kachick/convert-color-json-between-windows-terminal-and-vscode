@@ -19,7 +19,7 @@ jobs:
           deno task cache
           deno task build
       - name: Wait other jobs
-        uses: kachick/wait-other-jobs@v2
+        uses: kachick/wait-other-jobs@v3
         timeout-minutes: 15
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
