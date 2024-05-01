@@ -31,6 +31,14 @@ jobs:
     steps:
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v3
+        with:
+          skip-same-workflow: 'true'
+          skip-list: |
+            [
+              {
+                "workflowFile": "firebase-hosting-pull-request.yml"
+              }
+            ]
         timeout-minutes: 10
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
@@ -51,9 +59,15 @@ jobs:
     steps:
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v3
-        timeout-minutes: 10
         with:
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          skip-same-workflow: 'true'
+          skip-list: |
+            [
+              {
+                "workflowFile": "firebase-hosting-pull-request.yml"
+              }
+            ]
+        timeout-minutes: 10
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
         env:
@@ -68,6 +82,14 @@ jobs:
     steps:
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v3
+        with:
+          skip-same-workflow: 'true'
+          skip-list: |
+            [
+              {
+                "workflowFile": "firebase-hosting-pull-request.yml"
+              }
+            ]
         timeout-minutes: 20
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --delete-branch --squash "$PR_URL"
